@@ -12,8 +12,8 @@
       <geometry>
         <cylinder radius="0.1" length="1"/>
       </geometry>
-      <material name="Gray">
-        <color rgba="0.5 0.5 0.5 0" />
+      <material name="Orange">
+        <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
       </material>
     </visual>
     <collision>
