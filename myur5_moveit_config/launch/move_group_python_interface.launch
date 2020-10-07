@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find myur5_moveit_config)/launch/demo.launch"/>
+
+  <node name="move_group_python_interface" pkg="myur5_moveit_config" type="move_group_python_interface.py" respawn="false" output="screen">
+</node>
+</launch>

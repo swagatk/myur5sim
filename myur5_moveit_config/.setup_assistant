@@ -6,6 +6,6 @@ moveit_setup_assistant_config:
   SRDF:
     relative_path: config/myur5.srdf
   CONFIG:
-    author_name: Swagat
+    author_name: Swagat Kumar
     author_email: swagat.kumar@gmail.com
-    generated_timestamp: 1600514213
+    generated_timestamp: 1601066532

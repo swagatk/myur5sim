@@ -14,7 +14,10 @@
     <arg name="publish_monitored_planning_scene" value="true"/>
   </include>
 
-  <include file="$(find myur5_moveit_config)/launch/moveit_rviz.launch">
+  <!-- Load previously saved rviz file -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find myur5_moveit_config)/rviz/myur5.rviz"/>
+
+  <!--include file="$(find myur5_moveit_config)/launch/moveit_rviz.launch"-->
     <!--arg name="config" value="true"/--> <!-- this gives error --> 
-  </include>
+  <!--/include-->
 </launch>

@@ -1,7 +1,7 @@
 # Simulation settings for using moveit_sim_controllers
 moveit_sim_hw_interface:
-  joint_model_group: manipulator
-  joint_model_group_pose: AllZeros
+  joint_model_group: Manipulator
+  joint_model_group_pose: HomePose
 # Settings for ros_control_boilerplate control loop
 generic_hw_control_loop:
   loop_hz: 300
@@ -22,7 +22,4 @@ joint_state_controller:
   type: joint_state_controller/JointStateController
   publish_rate: 50
 controller_list:
-   - name: arm_controller
-     action_ns: "follow_joint_trajectory"
-     type: FollowJointTrajectory
-     joints: [shoulder_pan_joint, shoulder_lift_joint, elbow_joint, wrist_1_joint, wrist_2_joint, wrist_3_joint]
+  []

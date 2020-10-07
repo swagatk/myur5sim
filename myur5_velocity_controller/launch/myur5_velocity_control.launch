@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="limited" default="true"  doc="If true, limits joint range [-PI, PI] on all joints." />
+  <arg name="paused" default="false" doc="Starts gazebo in paused mode" />
+  <arg name="gui" default="true" doc="Starts gazebo gui" />
+  <!--arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface" /-->
+  <arg name="transmission_hw_interface" default="hardware_interface/VelocityJointInterface" />
+  
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!--arg name="world_name" default="worlds/empty.world"/-->
+    <!--arg name="world_name" value="$(find myur5_description)/worlds/house.world"/-->
+    <arg name="world_name" value="$(find myur5_description)/worlds/house_2.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find myur5_description)/urdf/myur5_2.urdf.xacro' transmission_hw_interface:=$(arg transmission_hw_interface)" />
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.0" respawn="false" output="screen" />
+
+  
+  <!-- replica of ur_gazebo/launch/controller_utils.launch -->
+  <!-- Need to see if we really need this file -->
+  <include file="$(find myur5_velocity_controller)/launch/myur5_controller_utils.launch"/>
+
+  <!-- start this controller -->
+  <rosparam file="$(find myur5_velocity_controller)/config/vel_controllers.yaml" command="load" />
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_vel_controller" respawn="false" output="screen"/>
+  
+  <!-- Another controller -->
+  <!--rosparam file="$(find myur5_velocity_controller)/config/vel_controllers.yaml" command="load" />
+  <node name="ros_control_controller_spawner" pkg="controller_manager" type="controller_manager" args="load joint_group_vel_controller" respawn="false" output="screen"  /-->
+</launch>
+
+
